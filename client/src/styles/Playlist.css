@@ -1,0 +1,79 @@
+/* playlists.css */
+
+.playlists-container {
+    padding: 20px;
+  }
+  
+  .playlists-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .playlist-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+  }
+  
+
+  
+  .playlist-item:hover {
+    background-color: grey;
+  }
+
+  .playlist-item:hover .playlist-link  {
+    color: white;
+  }
+  
+  .playlist-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .playlist-link:hover {
+    color: #007bff;
+  }
+  
+
+
+
+
+  .add-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .playlist-form {
+    margin-top: 20px;
+  }
+  
+  .playlist-form input[type='text'] {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    margin-right: 10px;
+  }
+  
+  .playlist-form label {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  .create-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }

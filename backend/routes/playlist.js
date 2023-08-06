@@ -6,7 +6,8 @@ const {
   deletePlaylist,
   updatePlaylist,
   AddtoPlaylist,
-  DeletefromPlaylist
+  DeletefromPlaylist,
+  getMyPlaylists
 } = require('../controllers/playlistController')
 // const requireAuth = require("../middleware/requireAuth")
 
@@ -23,6 +24,9 @@ router.delete('/deletefromplaylist', DeletefromPlaylist)
 
 //GET a single Playlist
 router.get('/:id', getPlaylist)
+
+//GET only users playlist Playlist
+router.get('/myplaylists/:_id', getMyPlaylists)
 
 // POST a new Playlist
 router.post('/', createPlaylist)

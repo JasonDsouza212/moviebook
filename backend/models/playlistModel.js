@@ -15,11 +15,11 @@ const MovieSchema = new Schema({
     type: String,
     required: true,
   },
-  genre: {
+  type: {
     type: String,
     required: true,
   },
-  Actors: {
+  imdb: {
     type: String,
     required: true,
   },

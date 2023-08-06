@@ -1,0 +1,215 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+#searchButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.movie-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.movie-card:hover {
+    transform: translateY(-5px);
+}
+
+.movie-poster {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.movie-details {
+    padding: 10px;
+}
+
+.movie-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.movie-year {
+    font-size: 14px;
+    color: #666;
+}
+
+
+
+@media (max-width: 768px) {
+    .movies-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  
+    /* Add any other adjustments as needed for smaller screens */
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px;
+  }
+  
+  .navbar-brand {
+    margin-right: 10px;
+  }
+  
+  .logo {
+    color: #fff;
+    font-size: 34px;
+    text-decoration: none;
+    font-weight: 900;
+  }
+  
+  .navbar-menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+
+  }
+  
+  /* Hamburger Menu styles for smaller screens */
+  .navbar-hamburger {
+    display: none;
+  }
+  
+  .hamburger {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-menu {
+      display: none;
+    }
+  
+    .navbar-hamburger {
+      display: block;
+    }
+  
+    .navbar-hamburger.active .hamburger:nth-child(1) {
+      transform: rotate(-45deg) translate(-4px, 4px);
+    }
+  
+    .navbar-hamburger.active .hamburger:nth-child(2) {
+      opacity: 0;
+    }
+  
+    .navbar-hamburger.active .hamburger:nth-child(3) {
+      transform: rotate(45deg) translate(-4px, -4px);
+    }
+  }
+  
+
+  /* Your existing CSS styles here */
+
+/* New styles for the mobile menu */
+.navbar-mobile {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-menu {
+      display: none;
+    }
+  
+    .navbar-hamburger {
+      display: block;
+    }
+  
+    .navbar-mobile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      background-color: #007bff;
+      padding: 10px;
+    }
+  
+    .navbar-mobile.active {
+      display: flex;
+    }
+  }
+  

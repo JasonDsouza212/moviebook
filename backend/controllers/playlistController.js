@@ -21,6 +21,18 @@ const getPlaylists = async (req, res) => {
   }
 };
 
+const getMyPlaylists = async (req, res) => {
+  try {
+    const _id = req.params._id; // Assuming the user ID is available in the request body
+    console.log(_id+ "this is id")
+    const playlists = await Playlist.find({ user_id: _id }).sort({ title: -1 });
+
+    res.status(200).json(playlists);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 
 
 // get a single Playlist
@@ -98,7 +110,7 @@ const createPlaylist = async (req, res) => {
 
 // add to playlist
 const AddtoPlaylist = async (req, res) => {
-    const { movie_title, Released,imageURL,genre,Actors, title } = req.body;
+    const { movie_title, Released,imageURL,imdb,type, title } = req.body;
   
     // Check if any of the required fie ,lds is missing
     const errors = [];
@@ -111,11 +123,11 @@ const AddtoPlaylist = async (req, res) => {
     if (!imageURL) {
       errors.push('imageURL is required');
     }
-    if (!genre) {
-      errors.push('genre is required');
+    if (!type) {
+      errors.push('type is required');
     }
-    if (!Actors) {
-      errors.push('Actors is required');
+    if (!imdb) {
+      errors.push('imdb is required');
     }
     if (!title) {
       errors.push('Playlist title is required');
@@ -138,8 +150,8 @@ const AddtoPlaylist = async (req, res) => {
         movie_title,
         Released,
         imageURL,
-        genre,
-        Actors
+        type,
+        imdb
       };
   
       // Add the movie to the playlist (using addToSet to avoid duplicates)
@@ -238,5 +250,6 @@ module.exports = {
   deletePlaylist,
   updatePlaylist,
   AddtoPlaylist,
-  DeletefromPlaylist
+  DeletefromPlaylist,
+  getMyPlaylists
 }
