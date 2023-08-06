@@ -20,7 +20,7 @@ const Navbar = () => {
         <Link className='playlist_nav' to="/playlists">Playlist</Link>
         {user &&(
           <div>
-            <span>{user.email}</span>
+            <span>{user.email.split('@')[0].toUpperCase()}</span>
             <button onClick={handleClick}>
                 Log out
             </button>

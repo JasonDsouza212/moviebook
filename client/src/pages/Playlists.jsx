@@ -120,9 +120,10 @@ const Playlists = () => {
           <ul className="playlists-list">
             {playlists.map((playlist) => (
               <li key={playlist._id} className="playlist-item">
-                <Link to={`/playlists/${playlist._id}`} className="playlist-link">
-                  {playlist.title}
+                <Link to={`/playlists/${encodeURIComponent(playlist.title)}/${playlist._id}`} className="playlist-link">
+                        {playlist.title}
                 </Link>
+
                 <button onClick={() => handlePlaylistDelete(playlist._id)}>
                 Delete
               </button>

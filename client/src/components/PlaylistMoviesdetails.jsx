@@ -1,15 +1,20 @@
 import React from 'react';
 
-const PlaylistMoviesdetails = ({ movie , playlist }) => {
+const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData }) => {
   const poster = movie.Poster === 'N/A' ? 'https://via.placeholder.com/300' : movie.Poster;
   async function handlePlaylistDelete(id){
     try {
       const response = await fetch(`http://localhost:4000/api/playlists/deletefromplaylist/${id}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title:playlistname }), // Convert title to JSON and pass it in the body
       });
 
       if (response.ok) {
         alert('Movie Deleted');
+        fetchMovieData()
         // Playlist was deleted successfully, you may choose to update the UI or fetch updated playlists list
         console.log('Playlist deleted successfully.');
         // Perform any additional actions or show success message here
@@ -32,7 +37,7 @@ const PlaylistMoviesdetails = ({ movie , playlist }) => {
         <p className="movie-year">{movie.Released}</p>
         <p className="movie-year">{movie.genre}</p>
         <p className="movie-year">{movie.Actors}</p>
-        <button onClick={() => handlePlaylistDelete(playlist._id)}> Delete </button>
+        <button className="create-button" onClick={() => handlePlaylistDelete(movie._id)}> Delete</button>
       </div>
     </div>
   );

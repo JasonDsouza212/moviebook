@@ -37,7 +37,7 @@ function App() {
               element={!user?<Signup />:<Playlists/>} 
             />
             <Route 
-              path="/playlists/:_id" 
+              path="/playlists/:title/:_id" 
               element={!user?<Signup />:<PlaylistMovies/>} 
             />
           </Routes>

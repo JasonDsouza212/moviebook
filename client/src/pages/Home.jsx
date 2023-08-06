@@ -56,12 +56,12 @@ const Movies = () => {
 
   // Function to handle the search button click
   const handleSearchButtonClick = () => {
-    setSearchTerm(val);
+    setSearchTerm(val.trim());
   };
 
   // Function to handle the search input change
   const handleSearchInputChange = (event) => {
-    setVal(event.target.value.trim());
+    setVal(event.target.value);
   };
 
   return (

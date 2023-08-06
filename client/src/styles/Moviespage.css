@@ -31,6 +31,7 @@
 }
 
 .movie-card {
+  text-align: center;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -66,6 +67,10 @@
 }
 
 
+.add-to-playlist-btn {
+  position: relative;
+  left: 60px;
+}
 
 @media (max-width: 768px) {
   .movies-grid {
@@ -135,7 +140,6 @@
 .close-modal-btn:hover {
   background-color: #0056b3;
 }
-
 
 
 
