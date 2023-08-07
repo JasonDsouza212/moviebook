@@ -136,13 +136,13 @@ const Playlists = () => {
                   </div>
                   <div className="playlist-info">
                     <p className="playlist-title">{playlist.title}</p>
-                    {user.id === playlist.user_id && (
+                  </div>
+                </Link>
+                {user.id === playlist.user_id && (
                       <button className="delete-button" onClick={() => handlePlaylistDelete(playlist._id)}>
                         Delete
                       </button>
                     )}
-                  </div>
-                </Link>
               </li>
             ))}
           </ul>
