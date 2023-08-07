@@ -8,8 +8,11 @@ const app = express();
 
 app.use(express.json());
 
-// Enable CORS for requests from your frontend domain
-app.use(cors());
+// Enable CORS for all origins
+app.use(cors({
+  origin: "*",
+  methods: ["POST", "GET", "DELETE"]
+}));
 
 app.use('/api/playlists', playlistRoutes);
 app.use('/api/user', userRoutes);
