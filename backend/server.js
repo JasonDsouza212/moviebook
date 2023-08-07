@@ -15,11 +15,11 @@ app.use('/api/playlists', playlistRoutes);
 app.use('/api/user', userRoutes);
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect("mongodb+srv://kd:Assignment@nodetuts.enksg.mongodb.net/?retryWrites=true&w=majority")
   .then(() => {
     // listen for requests
     app.listen(process.env.PORT, () => {
-      console.log('connected to db & listening on port', process.env.PORT)
+      console.log('connected to db & listening on port', 4000)
     })
   })
   .catch((error) => {
