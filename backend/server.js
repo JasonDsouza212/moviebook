@@ -1,22 +1,22 @@
-require('dotenv').config()
-const express = require("express")
-const mongoose = require("mongoose")
-const userRoutes = require('./routes/user')
-const playlistRoutes = require('./routes/playlist')
+const express = require("express");
+const mongoose = require("mongoose");
+const userRoutes = require('./routes/user');
+const playlistRoutes = require('./routes/playlist');
 const cors = require('cors');
 
-const app = express()
+const app = express();
 
 app.use(express.json());
-app.use(cors({
-  origin:["https://moviebookfrontend.vercel.app"],
-  methods: ["POST", "GET" , "DELETE"],
-  credentials: true
 
+// Enable CORS for requests from your frontend domain
+app.use(cors({
+  origin: "https://moviebookfrontend.vercel.app",
+  methods: ["POST", "GET", "DELETE"],
+  credentials: true
 }));
 
-app.use('/api/playlists', playlistRoutes)
-app.use('/api/user', userRoutes)
+app.use('/api/playlists', playlistRoutes);
+app.use('/api/user', userRoutes);
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
@@ -28,4 +28,4 @@ mongoose.connect(process.env.MONGO_URI)
   })
   .catch((error) => {
     console.log(error)
-  })
+  });
