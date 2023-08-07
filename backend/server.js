@@ -11,8 +11,7 @@ app.use(express.json());
 // Enable CORS for requests from your frontend domain
 app.use(cors({
   origin: ["https://moviebookfrontend.vercel.app"],
-  methods: ["POST", "GET", "DELETE"],
-  credentials: true
+  methods: ["POST", "GET", "DELETE"]
 }));
 
 app.use('/api/playlists', playlistRoutes);
