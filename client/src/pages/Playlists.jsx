@@ -18,7 +18,7 @@ const Playlists = () => {
     setError(null);
     setLoading(true);
     try {
-      const response = await fetch(`https://moviebooks.vercel.app/api/playlists/all/${user.id}`, {
+      const response = await fetch(`https://moviebook-backend.onrender.com/api/playlists/all/${user.id}`, {
         headers: {
           'Authorization': `Bearer ${user.token}`
         }
@@ -61,7 +61,7 @@ const Playlists = () => {
       user_id: user.id,
     };
     try {
-      const response = await fetch('https://moviebooks.vercel.app/api/playlists', {
+      const response = await fetch('https://moviebook-backend.onrender.com/api/playlists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const Playlists = () => {
 
   async function handlePlaylistDelete(id) {
     try {
-      const response = await fetch(`https://moviebooks.vercel.app/api/playlists/${id}`, {
+      const response = await fetch(`https://moviebook-backend.onrender.com/api/playlists/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${user.token}`

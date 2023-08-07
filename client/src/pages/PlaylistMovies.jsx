@@ -20,7 +20,7 @@ const PlaylistMovies = () => {
     setError(null);
     setLoading(true);
     try {  
-      const response = await fetch(`https://moviebooks.vercel.app/api/playlists/${_id}`,{
+      const response = await fetch(`https://moviebook-backend.onrender.com/api/playlists/${_id}`,{
         headers:{
           'Authorization':`Bearer ${user.token}`
         }
