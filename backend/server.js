@@ -8,7 +8,12 @@ const cors = require('cors');
 const app = express()
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:["https://moviebookfrontend.vercel.app/"],
+  methods: ["POST", "GET" , "DELETE"],
+  credentials: true
+
+}));
 
 app.use('/api/playlists', playlistRoutes)
 app.use('/api/user', userRoutes)
