@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Message from '../components/Message';
+import Loader from '../components/Loader';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('Marvel'); // Search term state
+  const [searchTerm, setSearchTerm] = useState('Marvel'); 
   const [val, setVal] = useState('');
   const [playlists, setPlaylists] = useState([]);
   const { user } = useAuthContext();
@@ -22,20 +23,21 @@ const Movies = () => {
         });
         const data = await response.json();
         if (data) {
-          // Map through the playlists and extract the titles into a new array
           const playlistTitles = data.map((playlist) => playlist.title);
           setPlaylists(playlistTitles);
           console.log(playlistTitles);
         } else {
-          // setError('No playlist found.');
+          setPlaylists([]);
+          console.log('No playlist found.');
         }
       } catch (error) {
-        // setError('Oops! Something went wrong.');
+        console.error('Oops! Something went wrong.', error);
       }
     };
-
+  
     fetchPlaylistData();
   }, []);
+  
 
   useEffect(() => {
     const fetchMovieData = async () => {
@@ -84,7 +86,7 @@ const Movies = () => {
       </div>
 
       {loading ? (
-        <Message message={"Loading..."}/>
+        <Loader/>
       ) : error ? (
          <Message message={error}/>
       ) : (

@@ -76,14 +76,10 @@
   .movies-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
-
-  /* Add any other adjustments as needed for smaller screens */
 }
 
 
 .movie-card {
-  /* Your existing movie card styles */
-  /* Make sure the movie card has a position relative to handle the modal's position */
   position: relative;
 }
 
@@ -96,7 +92,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 8px;
-  z-index: 10; /* Make sure the modal is displayed on top of other elements */
+  z-index: 10;
 }
 
 .playlist-modal h3 {

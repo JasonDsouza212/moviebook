@@ -18,6 +18,8 @@ function App() {
   }
 
   return (
+    <>
+    <div className='dont_display_on_smaller_screen'>This application currently works only on Desktop devices</div>
     <div className="App">
       <BrowserRouter>
         <Navbar />
@@ -44,6 +46,7 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
+    </>
   );
 }
 

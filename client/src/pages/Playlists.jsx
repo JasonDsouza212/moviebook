@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Message from '../components/Message';
+import Loader from '../components/Loader';
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -120,7 +121,7 @@ const Playlists = () => {
     <div className="playlists-container">
       <h1>Playlists</h1>
       {loading ? (
-         <Message message={"Loading..."}/>
+         <Loader/>
       ) : error ? (
         <Message message={error}/>
       ) : (

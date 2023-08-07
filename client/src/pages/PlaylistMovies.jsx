@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import PlaylistMoviesdetails from '../components/PlaylistMoviesdetails';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Message from '../components/Message';
+import Loader from '../components/Loader';
 
 const PlaylistMovies = () => {
   const { _id, title } = useParams();
@@ -53,7 +54,7 @@ const PlaylistMovies = () => {
   return (
 <div>
   {loading ? (
-     <Message message={"Loading..."}/>
+     <Loader/>
   ) : error ? (
     <Message message={error}/>
   ) : movies.length > 0 ? (

@@ -33,7 +33,6 @@ const MovieCard = ({ movie, playlists }) => {
 
       
       const json = await response.json();
-      const val=JSON.stringify(json)
       console.log(json)
 
 

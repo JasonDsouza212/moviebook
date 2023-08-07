@@ -1,13 +1,15 @@
-@import 'index.css';
 @import 'Navbar.css';
 @import 'Moviespage.css';
 @import 'Playlist.css';
 @import 'message.css';
+@import 'loader.css';
 
 .App {
   text-align: center;
 }
-
+.dont_display_on_smaller_screen{
+  display: none;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -40,5 +42,28 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width:1000px) {
+  body{
+      display: flex;
+  }
+  .dont_display_on_smaller_screen{
+      display: flex;
+      align-items: center;
+      height: 100vh;
+      justify-content: center;
+      text-align: center;
+      position: absolute;
+      width: 100vw;
+      z-index: -1000;
+      flex-wrap: wrap;
+      color: rgb(30, 172, 228);
+      font-weight: bold;
+      font-size: 24px;
+  }
+  .App{
+      display: none;
   }
 }

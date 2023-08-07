@@ -18,7 +18,6 @@ export const useLogin = () => {
       });
 
       const json = await response.json();
-      const val=JSON.stringify(json)
      
 
       if (!response.ok) {

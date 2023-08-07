@@ -7,7 +7,6 @@ const Navbar = () => {
   const {user}= useAuthContext()
 
   const handleClick =()=>{
-    
     logout()
     alert("Logged out successfully")
   }
@@ -33,9 +32,7 @@ const Navbar = () => {
           <Link to="/login">Login</Link>
           <Link to="/signup">Signup</Link>
         </div>
-        )}
-        
-        
+        )}  
         </nav>
       </div>
     </header>
