@@ -9,7 +9,7 @@ const app = express()
 
 app.use(express.json());
 app.use(cors({
-  origin:["https://moviebookfrontend.vercel.app/"],
+  origin:["https://moviebookfrontend.vercel.app"],
   methods: ["POST", "GET" , "DELETE"],
   credentials: true
 
