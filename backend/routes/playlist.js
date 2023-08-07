@@ -9,13 +9,13 @@ const {
   DeletefromPlaylist,
   getMyPlaylists
 } = require('../controllers/playlistController')
-// const requireAuth = require("../middleware/requireAuth")
+const requireAuth = require("../middleware/requireAuth")
 
 
 const router = express.Router()
 
 // require auth 
-// router.use(requireAuth)
+router.use(requireAuth)
 
 // GET all Playlist
 router.get('/all/:_id', getPlaylists)

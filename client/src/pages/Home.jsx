@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MovieCard from '../components/MovieCard';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Message from '../components/Message';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -14,7 +15,11 @@ const Movies = () => {
   useEffect(() => {
     const fetchPlaylistData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/playlists/myplaylists/${user.id}`);
+        const response = await fetch(`http://localhost:4000/api/playlists/myplaylists/${user.id}`,{
+          headers:{
+            'Authorization':`Bearer ${user.token}`
+          }
+        });
         const data = await response.json();
         if (data) {
           // Map through the playlists and extract the titles into a new array
@@ -22,10 +27,10 @@ const Movies = () => {
           setPlaylists(playlistTitles);
           console.log(playlistTitles);
         } else {
-          setError('No playlist found.');
+          // setError('No playlist found.');
         }
       } catch (error) {
-        setError('Oops! Something went wrong.');
+        // setError('Oops! Something went wrong.');
       }
     };
 
@@ -79,9 +84,9 @@ const Movies = () => {
       </div>
 
       {loading ? (
-        <p>Loading...</p>
+        <Message message={"Loading..."}/>
       ) : error ? (
-        <p>{error}</p>
+         <Message message={error}/>
       ) : (
         <div className="movies-grid">
         {movies.map((movie) => (

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const MovieCard = ({ movie, playlists }) => {
   const poster = movie.Poster === 'N/A' ? 'https://via.placeholder.com/300' : movie.Poster;
+  const {user} = useAuthContext()
 
   // State to manage the visibility of the playlist modal
   const [showModal, setShowModal] = useState(false);
@@ -15,13 +17,17 @@ const MovieCard = ({ movie, playlists }) => {
       type: movie.Type,
       imdb: movie.imdbID,
       title: playlist,
+      _id : user.id
     };
     console.log("This is the POST" + JSON.stringify(topush))
     try {
       
       const response = await fetch('http://localhost:4000/api/playlists/addtoplaylist', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Bearer ${user.token}`
+        },
         body: JSON.stringify(topush),
       });
 
@@ -60,7 +66,7 @@ const MovieCard = ({ movie, playlists }) => {
     <div className="movie-card">
       <img src={poster} alt={movie.Title} className="movie-poster" />
       <div className="movie-details">
-        <h2 className="movie-title">{movie.Title}</h2>
+        <h2 className="movie-title">{movie.Title.length>25? movie.Title.slice(0,20)+"..." :movie.Title.slice(0,23)}</h2>
         <p className="movie-year">{movie.Year}</p>
         <button className="add-to-playlist-btn close-modal-btn" onClick={handleAddToPlaylistClick}>
           Add to Playlist

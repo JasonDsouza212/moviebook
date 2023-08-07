@@ -110,7 +110,7 @@ const createPlaylist = async (req, res) => {
 
 // add to playlist
 const AddtoPlaylist = async (req, res) => {
-    const { movie_title, Released,imageURL,imdb,type, title } = req.body;
+    const { movie_title, Released,imageURL,imdb,type, title , _id } = req.body;
   
     // Check if any of the required fie ,lds is missing
     const errors = [];
@@ -132,6 +132,9 @@ const AddtoPlaylist = async (req, res) => {
     if (!title) {
       errors.push('Playlist title is required');
     }
+    if (!_id) {
+      errors.push('_id title is required');
+    }
   
     if (errors.length > 0) {
       return res.status(400).json({ error: 'Please fill in all the fields', errors });
@@ -139,7 +142,7 @@ const AddtoPlaylist = async (req, res) => {
   
     try {
       // Find the playlist based on the title
-      const playlist = await Playlist.findOne({ title });
+      const playlist = await Playlist.findOne({ title, user_id: _id });
   
       if (!playlist) {
         return res.status(404).json({ error: 'Playlist not found' });
@@ -168,12 +171,15 @@ const AddtoPlaylist = async (req, res) => {
   // Delte from playlist
   const DeletefromPlaylist = async (req, res) => {
     const { _id } = req.params
-    const { title } = req.body;
+    const { title , user_id } = req.body;
   
     // Check if any of the required fields is missing
     const errors = [];
     if (!title) {
       errors.push('Playlist title is required');
+    }
+    if (!user_id) {
+      errors.push('Playlist user_id is required');
     }
     if (!_id) {
       errors.push('_id of the movie to delete is required');
@@ -185,7 +191,7 @@ const AddtoPlaylist = async (req, res) => {
   
     try {
       // Find the playlist based on the title
-      const playlist = await Playlist.findOne({ title });
+      const playlist = await Playlist.findOne({ title , user_id });
   
       if (!playlist) {
         return res.status(404).json({ error: 'Playlist not found' });

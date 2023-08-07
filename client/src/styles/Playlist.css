@@ -1,44 +1,15 @@
 /* playlists.css */
 
-.playlists-container {
-    padding: 20px;
-  }
-  
-  .playlists-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .playlist-item {
-    padding: 10px;
-    border: 1px solid #ccc;
-    transition: background-color 0.3s ease;
-  }
-  
-
-  
   .playlist-item:hover {
     background-color: grey;
   }
 
-  .playlist-item:hover .playlist-link  {
-    color: white;
+  .playlist-item{
+    list-style: none;
   }
-  
   .playlist-link {
     text-decoration: none;
-    color: #333;
-    font-weight: bold;
   }
-  
-  .playlist-link:hover {
-    color: #007bff;
-  }
-  
-
-
-
 
   .add-button {
     margin-top: 10px;
@@ -71,9 +42,90 @@
   .create-button {
     margin-top: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
   }
+
+
+
+  /* styles.css (or you can import it in your React component) */
+.playlists-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.playlists-list {
+  padding: 0;
+}
+
+.playlist-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #e3e3e3;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.playlist-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+
+.playlist-title {
+  font-size: 20px;
+  color: #333;
+  font-weight: bold;
+  
+}
+
+.delete-button {
+  background-color: #e35b52;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: auto;
+}
+
+.add-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-left: auto;
+}
+
+.playlist-form {
+  margin-top: 20px;
+}
+
+.playlist-form input[type="text"] {
+  color: #333;
+  background-color: #f9f9f9;
+  border: 1px solid rgb(115, 114, 114);
+}
+
+.playlist-form button {
+  background-color: #4caf50;
+  color: #fff;
+  font-weight: bold;
+}

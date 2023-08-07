@@ -1,15 +1,18 @@
 import React from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
 
-const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData }) => {
-  const poster = movie.Poster === 'N/A' ? 'https://via.placeholder.com/300' : movie.Poster;
+const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData ,isOwner ,user_id }) => {
+  // const poster = movie.Poster === 'N/A' ? 'https://via.placeholder.com/300' : movie.Poster;
+  const {user}= useAuthContext()
   async function handlePlaylistDelete(id){
     try {
       const response = await fetch(`http://localhost:4000/api/playlists/deletefromplaylist/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization':`Bearer ${user.token}`
         },
-        body: JSON.stringify({ title:playlistname }), // Convert title to JSON and pass it in the body
+        body: JSON.stringify({ title:playlistname, user_id }), // Convert title to JSON and pass it in the body
       });
 
       if (response.ok) {
@@ -37,7 +40,7 @@ const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData }) => {
         <p className="movie-year">{movie.Released}</p>
         <p className="movie-year">{movie.genre}</p>
         <p className="movie-year">{movie.Actors}</p>
-        <button className="create-button" onClick={() => handlePlaylistDelete(movie._id)}> Delete</button>
+        {isOwner && <button className="delete-button" onClick={() => handlePlaylistDelete(movie._id)}> Delete</button>}
       </div>
     </div>
   );

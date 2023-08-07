@@ -2,6 +2,7 @@
 @import 'Navbar.css';
 @import 'Moviespage.css';
 @import 'Playlist.css';
+@import 'message.css';
 
 .App {
   text-align: center;

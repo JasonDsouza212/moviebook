@@ -7,7 +7,9 @@ const Navbar = () => {
   const {user}= useAuthContext()
 
   const handleClick =()=>{
+    
     logout()
+    alert("Logged out successfully")
   }
 
   return (

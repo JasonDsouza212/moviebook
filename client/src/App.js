@@ -34,7 +34,7 @@ function App() {
             />
              <Route 
               path="/playlists" 
-              element={!user?<Signup />:<Playlists/>} 
+              element={!user?<Login />:<Playlists/>} 
             />
             <Route 
               path="/playlists/:title/:_id" 

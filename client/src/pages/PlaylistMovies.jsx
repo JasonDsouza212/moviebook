@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaylistMoviesdetails from '../components/PlaylistMoviesdetails';
+import { useAuthContext } from '../hooks/useAuthContext';
+import Message from '../components/Message';
 
 const PlaylistMovies = () => {
   const { _id, title } = useParams();
@@ -10,13 +12,24 @@ const PlaylistMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isOwner, setIsOwner]= useState(false)
+  const {user}= useAuthContext()
 
   const fetchMovieData = async () => {
     setError(null);
     setLoading(true);
     try {  
-      const response = await fetch(`http://localhost:4000/api/playlists/${_id}`);
+      const response = await fetch(`http://localhost:4000/api/playlists/${_id}`,{
+        headers:{
+          'Authorization':`Bearer ${user.token}`
+        }
+      });
       const data = await response.json();
+      if(data.user_id===user.id){
+        setIsOwner(true)
+      }else {
+        setIsOwner(false)
+      }
       console.log(data.movies)
       if (data.movies) {
         setMovies(data.movies);
@@ -40,17 +53,17 @@ const PlaylistMovies = () => {
   return (
 <div>
   {loading ? (
-    <p>Loading...</p>
+     <Message message={"Loading..."}/>
   ) : error ? (
-    <p>{error}</p>
+    <Message message={error}/>
   ) : movies.length > 0 ? (
     <div className="movies-grid">
       {movies.map((movie) => (
-        <PlaylistMoviesdetails key={movie._id} movie={movie} playlistname={title}  fetchMovieData={fetchMovieData}/>
+        <PlaylistMoviesdetails key={movie._id} movie={movie} playlistname={title}  fetchMovieData={fetchMovieData} isOwner={isOwner} user_id={user.id}/>
       ))}
     </div>
   ) : (
-    <p>No movies found in this playlist.</p>
+    <Message message={"No movies found in this playlist"}/>
   )}
 </div>
   );

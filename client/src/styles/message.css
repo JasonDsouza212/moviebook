@@ -1,0 +1,40 @@
+/* styles.css (or you can import it in your React component) */
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Use min-height to prevent the container from collapsing on small content */
+    background-color: #dfdfdf;
+  }
+  
+  .message-box {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    max-width: 400px; /* Limit the maximum width of the message box */
+    width: 80%; /* Use a percentage to make it responsive */
+  }
+  
+  .message-text {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Responsive Styles */
+  
+  @media screen and (max-width: 768px) {
+    /* Adjust font size for smaller screens */
+    .message-text {
+      font-size: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    /* Further adjust font size for even smaller screens */
+    .message-text {
+      font-size: 16px;
+    }
+  }
+  
