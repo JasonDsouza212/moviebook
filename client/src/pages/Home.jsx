@@ -35,7 +35,9 @@ const Movies = () => {
       }
     };
   
-    fetchPlaylistData();
+    if(user){
+      fetchPlaylistData();
+    }
   }, []);
   
 
