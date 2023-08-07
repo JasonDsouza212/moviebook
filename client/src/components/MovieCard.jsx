@@ -22,7 +22,7 @@ const MovieCard = ({ movie, playlists }) => {
     console.log("This is the POST" + JSON.stringify(topush))
     try {
       
-      const response = await fetch('api/playlists/addtoplaylist', {
+      const response = await fetch('https://moviebooks.vercel.app/api/playlists/addtoplaylist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
