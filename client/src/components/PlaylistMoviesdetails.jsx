@@ -6,7 +6,7 @@ const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData ,isOwner ,us
   const {user}= useAuthContext()
   async function handlePlaylistDelete(id){
     try {
-      const response = await fetch(`https://moviebooks.vercel.app/api/playlists/deletefromplaylist/${id}`, {
+      const response = await fetch(`api/playlists/deletefromplaylist/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
