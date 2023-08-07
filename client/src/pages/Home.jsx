@@ -16,7 +16,7 @@ const Movies = () => {
   useEffect(() => {
     const fetchPlaylistData = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/playlists/myplaylists/${user.id}`,{
+        const response = await fetch(`https://moviebooks.vercel.app/api/playlists/myplaylists/${user.id}`,{
           headers:{
             'Authorization':`Bearer ${user.token}`
           }
