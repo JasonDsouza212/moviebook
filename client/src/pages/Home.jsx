@@ -44,7 +44,7 @@ const Movies = () => {
       setError(null);
       setLoading(true);
       try {  
-        const response = await fetch(`http://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${process.env.REACT_APP_APIKEY}`);
+        const response = await fetch(`http://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=ad07eb`);
         const data = await response.json();
         if (data.Search) {
           setMovies(data.Search);
