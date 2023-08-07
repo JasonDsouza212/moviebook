@@ -1,6 +1,6 @@
 const User =require("../models/userModel")
 const jwt= require('jsonwebtoken')
-const jwtval = jasondsouza6uyoshimarioluigipeachbowser
+const jwtval = "jasondsouza6uyoshimarioluigipeachbowser"
 const createToken = (_id)=>{
     return jwt.sign({_id}, jwtval,{expiresIn:'3d'})
 }
