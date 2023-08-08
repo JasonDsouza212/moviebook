@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const MovieCard = ({ movie, playlists }) => {
-  const poster = movie.Poster === 'N/A' ? 'https://via.placeholder.com/300' : movie.Poster;
+  const poster = movie.Poster === 'N/A' ? 'https://external-preview.redd.it/LxmS9sZAnmKmtTCbNNGJRlADYv-9xwsOlvhWnUI-lEs.jpg?auto=webp&s=befb86a2df7d8a0609bf17b275e3a0aadf5dd1c7' : movie.Poster;
   const {user} = useAuthContext()
 
   // State to manage the visibility of the playlist modal
@@ -22,7 +22,7 @@ const MovieCard = ({ movie, playlists }) => {
     console.log("This is the POST" + JSON.stringify(topush))
     try {
       
-      const response = await fetch('https://moviebook-backend.onrender.com/api/playlists/addtoplaylist', {
+      const response = await fetch('http://localhost:4000/api/playlists/addtoplaylist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -67,9 +67,11 @@ const MovieCard = ({ movie, playlists }) => {
       <div className="movie-details">
         <h2 className="movie-title">{movie.Title.length>25? movie.Title.slice(0,20)+"..." :movie.Title.slice(0,23)}</h2>
         <p className="movie-year">{movie.Year}</p>
-        <button className="add-to-playlist-btn close-modal-btn" onClick={handleAddToPlaylistClick}>
-          Add to Playlist
-        </button>
+        {user&&(
+          <button className="add-to-playlist-btn close-modal-btn" onClick={handleAddToPlaylistClick}>
+               Add to Playlist
+          </button>
+        )}
         {showModal && (
           <div className="playlist-modal">
             <h3>Select a Playlist</h3>
