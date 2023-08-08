@@ -1,42 +1,38 @@
 <div id="header" align="center">
-    <h1>💸 Finmo </h1>
-    <h3><strong><em>A modern plug & play, API-driven treasury OS</em></strong></h3>
-  <img src="https://i.ibb.co/C6kkMp8/Screenshot-from-2023-06-07-20-23-21.png" alt="home page of the website"><br>
+    <h1>🎬 Movie Book 📖</h1>
+    <h3><strong><em>A Playlist app for your Favourite Movies and series</em></strong></h3>
+  <img src="https://i.ibb.co/4pVVPgg/Screenshot-from-2023-08-08-15-36-36.png" alt="home page of the website"><br>
     <!-- to change tagline if necessary -->
     </div> <br>
 
-# 🙌 Welcome to Finmo Demo App
+# 🙌 Welcome to Movie Book App
 
  # 🚀 About
 
-- The app was built based on the assignment given by **Finmo** to test full-stack skills.
-- Finmo offers you a quick way to start selling online using local payment methods, disbursing funds to your suppliers, or facilitating global trade between buyers and sellers.
-- Finmo provided the Test API [Sandbox API].
-- This project consists of a **basic app built on the Finmo sandbox API.**
-
+- The app is designed to help you save your favorite movies and series in a playlist, allowing you to keep track of them.
+- The app fetches data from the free-tier API provided by  [omdbAPI](https://www.omdbapi.com/)
 
 # 💰 Features
-- We can log in using an **Access Key and Secret Key**.
-- By logging in with an Access Key and Secret Key, everyone can use the app.
-- The app provided 3 services:
-   - **Payin**
-   - **Payout**
-   - **Customer**
-- In Payin, we can view the available Payin methods, as well as the entire Payin history and individual Payin details.
-- In Payout, we can view the available Payout methods and the entire Payout history.
-- In Customers, we can view all customers and their individual details when clicked on.
-- The user can **add a customer**.
-- The user can also **make a Payin**.
-- The user can also **logout**
-- The user can Delete **customers**
+- Login or sign up using an **Email ID and Password**.
+- Access the app by logging in with your Email ID and Password.
+- The app provides the following services:
+  - **Create Playlist**: Organize your favorite movies and series.
+  - **Check Public Playlists**: Explore playlists shared by others.
+  - **Search for Movies**: Discover movies using the app's search functionality.
+  - **Delete from Your Playlist**: Remove items from your playlists.
+- In the "User" section, you can view all public playlists and access their details by clicking on them.
+- Enjoy the flexibility to **log out** as needed.
+- Delete **your own playlists** with ease.
 
 # 🛠️ Tech Stack
 
 This project uses: <br><br>
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![PNPM](https://img.shields.io/badge/pnpm-%2320232a.svg?style=for-the-badge&logo=pnpm&logoColor=%2361DAFB)
-![NestJs](https://img.shields.io/badge/nestjs-%23646CFF.svg?style=for-the-badge&logo=nestjs&logoColor=white)
-![Vercel](https://img.shields.io/badge/finmo-%23000000.svg?style=for-the-badge&logo=finmo&logoColor=white)
+![NPM](https://img.shields.io/badge/npm-%2320232a.svg?style=for-the-badge&logo=npm&logoColor=%2361DAFB)
+![MongoDB](https://img.shields.io/badge/mongodb-%3FA037.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+![Express](https://img.shields.io/badge/Express-%23000000.svg?style=for-the-badge&logo=express&logoColor=white)
+![IMDBAPI](https://img.shields.io/badge/IMDBAPI-%23646CFF.svg?style=for-the-badge&logo=link&logoColor=blue)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 
 ## Prerequisites
 
@@ -46,65 +42,67 @@ Before installation, you need to have installed/knowledge of the following:
 ![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
 
 ## 🤝 Contributing
-### How to Contribute to this repository
+### How to Run this project Locally
 
-1. Fork the repository (Click the Fork button in the top right of this page,
-   click your Profile Image)
-2. Clone the forked repository to your local machine.
-
-3. change the present working directory
-
+1. clone the **dev** branch to your local machine
 ```markdown
-cd Finmo
+git clone --branch dev https://github.com/JasonDsouza212/moviebook.git
 ```
-4. change the present working directory to serverapi
+2. change the present working directory
 
 ```markdown
-cd serverapi
+cd moviebook
 ```
-
-5. Open CMD in your current directory and install pnpm packages using command.[If pnpm is not installed, you can install it by clicking on this link to [pnpm](https://pnpm.io/installation)]
+3. change the present working directory to backend
 
 ```markdown
-pnpm i
+cd backend
+```
+4. Set the **.env** file with the value in the backend folder
+- PORT= **4000**
+- MONGO_URI=**Your MongoDB URL**
+- SECRET= **Any string with minimun 40 characters**
+
+5. Open CMD in your current directory and install npm packages using command:
+
+```markdown
+npm install
 ```
 
 6. Run it locally using
 
 ```
-pnpm start:dev
+npm start
 ```
 
-7. change the present working directory to client
+7. Change the present working directory to **client** by opening a new terminal window and executing the following command:
 
 ```markdown
 cd ..
 cd client
 ```
 
-8. Open CMD in your current directory and install pnpm packages using command.[If pnpm is not installed, you can install it by clicking on this link to [pnpm](https://pnpm.io/installation)]
+8. Set the **.env** file with the value in the client folder
+- REACT_APP_APIKEY = **Your OMDBAPI APIKEY**
+
+9. Open the Command Prompt (CMD) in your current directory and install npm packages using the following command:
 
 ```markdown
-pnpm i
+npm install
 ```
 
 > Run it locally using
 
 ```
-pnpm start
+npm start
 ```
 
-9. you can access the application now At  :
+10. You can now access the application at :
 ```
-http://localhost:3001/
-```
-10. Use the below credentials to test the Application
-```
-AccessKey: AK_FINMO_SBX_46CB8F4C4D4B4942A26D62094FC03D1E
-secretKey: SK_FINMO_SBX_C8EB585A_CF94_46EB_BE02_40BF3BCB03B7
+http://localhost:3000/
 ```
 
 <br>
 <div align="center">
-<h3>This project uses pnpm, so please don't install dependencies with npm. </h3>
+<h4>This project has been created as a means to practice and develop my skills. Please feel free to upgrade and enhance it, as this collaborative effort can serve as a valuable learning experience for both of us. </h4>
 </div>

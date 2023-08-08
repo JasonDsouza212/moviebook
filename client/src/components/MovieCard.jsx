@@ -67,9 +67,11 @@ const MovieCard = ({ movie, playlists }) => {
       <div className="movie-details">
         <h2 className="movie-title">{movie.Title.length>25? movie.Title.slice(0,20)+"..." :movie.Title.slice(0,23)}</h2>
         <p className="movie-year">{movie.Year}</p>
-        <button className="add-to-playlist-btn close-modal-btn" onClick={handleAddToPlaylistClick}>
-          Add to Playlist
-        </button>
+        {user &&(
+          <button className="add-to-playlist-btn close-modal-btn" onClick={handleAddToPlaylistClick}>
+            Add to Playlist
+          </button>
+        )}
         {showModal && (
           <div className="playlist-modal">
             <h3>Select a Playlist</h3>
