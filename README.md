@@ -28,7 +28,7 @@
 
 This project uses: <br><br>
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![NPM](https://img.shields.io/badge/npm-%2320232a.svg?style=for-the-badge&logo=npm&logoColor=%2361DAFB)
+![NPM](https://img.shields.io/badge/pnpm-%2320232a.svg?style=for-the-badge&logo=pnpm&logoColor=%2361DAFB)
 ![MongoDB](https://img.shields.io/badge/mongodb-%3FA037.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-%23000000.svg?style=for-the-badge&logo=express&logoColor=white)
 ![IMDBAPI](https://img.shields.io/badge/IMDBAPI-%23646CFF.svg?style=for-the-badge&logo=link&logoColor=blue)
@@ -63,16 +63,16 @@ cd backend
 - MONGO_URI=**Your MongoDB URL**
 - SECRET= **Any string with minimun 40 characters**
 
-5. Open CMD in your current directory and install npm packages using command:
+5. Open CMD in your current directory and install pnpm packages using command:
 
 ```markdown
-npm install
+pnpm install
 ```
 
 6. Run it locally using
 
 ```
-npm start
+pnpm start
 ```
 
 7. Change the present working directory to **client** by opening a new terminal window and executing the following command:
@@ -85,16 +85,16 @@ cd client
 8. Set the **.env** file with the value in the client folder
 - REACT_APP_APIKEY = **Your OMDBAPI APIKEY**
 
-9. Open the Command Prompt (CMD) in your current directory and install npm packages using the following command:
+9. Open the Command Prompt (CMD) in your current directory and install pnpm packages using the following command:
 
 ```markdown
-npm install
+pnpm install
 ```
 
 > Run it locally using
 
 ```
-npm start
+pnpm start
 ```
 
 10. You can now access the application at :
