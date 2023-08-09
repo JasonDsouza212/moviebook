@@ -21,7 +21,7 @@ function App() {
     <>
     <div className='dont_display_on_smaller_screen'>This application currently works only on Desktop devices</div>
     <div className="App">
-      <BrowserRouter>
+    <BrowserRouter>
         <Navbar />
         <div className="pages">
           <Routes>
@@ -36,11 +36,11 @@ function App() {
             />
              <Route 
               path="/playlists" 
-              element={!user?<Login />:<Playlists/>} 
+              element={<Playlists/>} 
             />
             <Route 
               path="/playlists/:title/:_id" 
-              element={!user?<Signup />:<PlaylistMovies/>} 
+              element={<PlaylistMovies/>} 
             />
           </Routes>
         </div>

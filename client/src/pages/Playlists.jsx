@@ -38,9 +38,35 @@ const Playlists = () => {
       setLoading(false);
     }
   };
+  const fetchPlaylistDataofnonlogin = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch(`https://moviebook-backend.onrender.com/api/playlists/all`, {
+      });
+      const data = await response.json();
+
+      if (data) {
+        setPlaylists(data);
+      } else {
+        setError('No playlists found.');
+        setPlaylists([]); // Set an empty array if data is not an array
+      }
+    } catch (error) {
+      setError('Oops! Something went wrong.');
+      setPlaylists([]); // Set an empty array in case of error
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   useEffect(() => {
-    fetchPlaylistData();
+    if(user){
+      fetchPlaylistData();
+    }else{
+      fetchPlaylistDataofnonlogin();
+    }
   }, []);
 
   const handleAddPlaylist = () => {
