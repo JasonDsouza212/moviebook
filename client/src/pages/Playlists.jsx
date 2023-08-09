@@ -164,7 +164,7 @@ const Playlists = () => {
                     <p className="playlist-title">{playlist.title}</p>
                   </div>
                 </Link>
-                {user.id === playlist.user_id && (
+                {user&&user.id === playlist.user_id && (
                       <button className="delete-button" onClick={() => handlePlaylistDelete(playlist._id)}>
                         Delete
                       </button>
@@ -172,9 +172,11 @@ const Playlists = () => {
               </li>
             ))}
           </ul>
-          <button className="add-button" onClick={handleAddPlaylist}>
-            {btn}
-          </button>
+          {user&&(
+              <button className="add-button" onClick={handleAddPlaylist}>
+              {btn}
+            </button>
+          )}
           {showForm && (
             <form className="playlist-form" onSubmit={handleFormSubmit}>
               <input
