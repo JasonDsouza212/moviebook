@@ -39,8 +39,34 @@ const Playlists = () => {
     }
   };
 
+  const fetchPlaylistDataofnonlogin = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:4000/api/playlists/all`, {
+      });
+      const data = await response.json();
+
+      if (data) {
+        setPlaylists(data);
+      } else {
+        setError('No playlists found.');
+        setPlaylists([]); // Set an empty array if data is not an array
+      }
+    } catch (error) {
+      setError('Oops! Something went wrong.');
+      setPlaylists([]); // Set an empty array in case of error
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchPlaylistData();
+    if(user){
+      fetchPlaylistData();
+    }else{
+      fetchPlaylistDataofnonlogin();
+    }
   }, []);
 
   const handleAddPlaylist = () => {
@@ -138,7 +164,7 @@ const Playlists = () => {
                     <p className="playlist-title">{playlist.title}</p>
                   </div>
                 </Link>
-                {user.id === playlist.user_id && (
+                {user&&user.id === playlist.user_id && (
                       <button className="delete-button" onClick={() => handlePlaylistDelete(playlist._id)}>
                         Delete
                       </button>
@@ -146,9 +172,11 @@ const Playlists = () => {
               </li>
             ))}
           </ul>
-          <button className="add-button" onClick={handleAddPlaylist}>
+          {user && (
+            <button className="add-button" onClick={handleAddPlaylist}>
             {btn}
           </button>
+          )}
           {showForm && (
             <form className="playlist-form" onSubmit={handleFormSubmit}>
               <input

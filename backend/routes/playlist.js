@@ -1,4 +1,5 @@
 const express = require('express')
+const requireAuth = require("../middleware/requireAuth")
 const {
   createPlaylist,
   getPlaylists,
@@ -7,12 +8,18 @@ const {
   updatePlaylist,
   AddtoPlaylist,
   DeletefromPlaylist,
-  getMyPlaylists
+  getMyPlaylists,
+  getnonuserPlaylists,
+  getPlaylistfornonlogin
 } = require('../controllers/playlistController')
-const requireAuth = require("../middleware/requireAuth")
-
 
 const router = express.Router()
+
+// GET all Playlist
+router.get('/all', getnonuserPlaylists)
+
+//GET a single Playlist for non loggedin users
+router.get('/movies/:id', getPlaylistfornonlogin)
 
 // require auth 
 router.use(requireAuth)

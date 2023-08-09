@@ -2,16 +2,14 @@ const Playlist = require('../models/playlistModel')
 const mongoose = require('mongoose')
 
 // get all Playlist
-
-
 const getPlaylists = async (req, res) => {
   try {
-    const _id = req.params._id; // Assuming the user ID is available in the request body
+    const _id = req.params._id; 
     console.log(_id+ "this is id")
     const playlists = await Playlist.find({
       $or: [
-        { private: false }, // Return playlists that are not private
-        { $and: [{ private: true }, { user_id: _id }] } // Return the playlist if it's private and the user_id matches
+        { private: false }, 
+        { $and: [{ private: true }, { user_id: _id }] }
       ]
     }).sort({ title: -1 });
 
@@ -20,6 +18,15 @@ const getPlaylists = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
+const getnonuserPlaylists = async (req, res) => {
+  try {
+    const playlists = await Playlist.find({ private: false }).sort({ title: -1 });
+    res.status(200).json(playlists);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 
 const getMyPlaylists = async (req, res) => {
   try {
@@ -32,7 +39,6 @@ const getMyPlaylists = async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 };
-
 
 
 // get a single Playlist
@@ -54,33 +60,23 @@ const getPlaylist = async (req, res) => {
 
 
 // get a single Playlist
-// const getPlaylist = async (req, res) => {
-//   const {user_id} = req.body
-//   const { id } = req.params
-//  console.log(req.body)
-//   console.log(user_id+" and "+ id)
+const getPlaylistfornonlogin = async (req, res) => {
+  const { id } = req.params
 
-//   if (!mongoose.Types.ObjectId.isValid(id)) {
-//     return res.status(404).json({error: 'No such Playlist'})
-//   }
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such Playlist'})
+  }
 
-//   const playlist = await Playlist.findById(id)
+  const playlist = await Playlist.findById(id)
 
-//   if (!playlist) {
-//     return res.status(404).json({error: 'No such Playlist'})
-//   }
-
-
-//   if(playlist.private=="true"){
-//     if(playlist.user_id!=user_id){
-//       return res.status(404).json({error: 'No such Playlist'})
-
-//     }
-//   }
+  if (!playlist) {
+    return res.status(404).json({error: 'No such Playlist'})
+  }
   
-//   res.status(200).json(playlist)
-// }
-// create new Playlist
+  res.status(200).json(playlist)
+}
+
+
 const createPlaylist = async (req, res) => {
   const { title, user_id , private } = req.body;
   const movies = []; // Initialize movies as an empty array
@@ -107,6 +103,8 @@ const createPlaylist = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+
 
 // add to playlist
 const AddtoPlaylist = async (req, res) => {
@@ -167,6 +165,8 @@ const AddtoPlaylist = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
+
+
   
   // Delte from playlist
   const DeletefromPlaylist = async (req, res) => {
@@ -207,6 +207,9 @@ const AddtoPlaylist = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
+
+
+
   
 // Delte playlist
   const deletePlaylist = async (req, res) => {
@@ -229,6 +232,8 @@ const AddtoPlaylist = async (req, res) => {
     }
   };
 
+
+
 // update a Playlist
 const updatePlaylist = async (req, res) => {
   const { id } = req.params
@@ -244,7 +249,6 @@ const updatePlaylist = async (req, res) => {
   if (!playlist) {
     return res.status(400).json({error: 'No such Playlist'})
   }
-
   res.status(200).json(playlist)
 }
 
@@ -257,5 +261,7 @@ module.exports = {
   updatePlaylist,
   AddtoPlaylist,
   DeletefromPlaylist,
-  getMyPlaylists
+  getMyPlaylists,
+  getnonuserPlaylists,
+  getPlaylistfornonlogin
 }

@@ -7,9 +7,6 @@ import Loader from '../components/Loader';
 
 const PlaylistMovies = () => {
   const { _id, title } = useParams();
-
-  console.log(title)
-
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,9 +42,32 @@ const PlaylistMovies = () => {
     }
   };
 
+  const fetchMovieDatafornonlogin = async () => {
+    setError(null);
+    setLoading(true);
+    try {  
+      const response = await fetch(`http://localhost:4000/api/playlists/movies/${_id}`);
+      const data = await response.json();
+      console.log(data.movies)
+      if (data.movies) {
+        setMovies(data.movies);
+        setLoading(false); // Update the loading state after fetching data
+      } else {
+        setError('No movies found.');
+        setLoading(false); // Update the loading state even if there's an error
+      }
+    } catch (error) {
+      setError('Oops! Something went wrong.');
+      setLoading(false); // Update the loading state in case of an error
+    }
+  };
+
   useEffect(() => {
-    fetchMovieData();
-    console.log(movies)
+    if(user){
+      fetchMovieData();
+    }else{
+      fetchMovieDatafornonlogin()
+    }
 
   }, [_id]);
 
@@ -60,7 +80,12 @@ const PlaylistMovies = () => {
   ) : movies.length > 0 ? (
     <div className="movies-grid">
       {movies.map((movie) => (
-        <PlaylistMoviesdetails key={movie._id} movie={movie} playlistname={title}  fetchMovieData={fetchMovieData} isOwner={isOwner} user_id={user.id}/>
+        <PlaylistMoviesdetails key={movie._id} 
+        movie={movie} 
+        playlistname={title}  
+        fetchMovieData={fetchMovieData} 
+        isOwner={isOwner} 
+        user_id={user?user.id:""}/>
       ))}
     </div>
   ) : (

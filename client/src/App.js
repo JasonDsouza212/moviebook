@@ -36,11 +36,11 @@ function App() {
             />
              <Route 
               path="/playlists" 
-              element={!user?<Login />:<Playlists/>} 
+              element={<Playlists/>} 
             />
             <Route 
               path="/playlists/:title/:_id" 
-              element={!user?<Signup />:<PlaylistMovies/>} 
+              element={<PlaylistMovies/>} 
             />
           </Routes>
         </div>
