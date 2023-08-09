@@ -26,7 +26,7 @@
 
 .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 0.25fr));
   gap: 20px;
 }
 
@@ -74,7 +74,7 @@
 
 @media (max-width: 768px) {
   .movies-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 0.25fr));
   }
 }
 
