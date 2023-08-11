@@ -7,6 +7,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Playlists from './pages/Playlists';
 import PlaylistMovies from './pages/PlaylistMovies';
+import Profile from './pages/Profile';
+import ResetPassword from './pages/Resetpassword';
+import MyPlaylists from './pages/MyPlaylists';
 
 function App() {
   const key = process.env.REACT_APP_APIKEY;
@@ -30,7 +33,7 @@ function App() {
               path="/login" 
               element={!user?<Login />:<Navigate to="/"/>} 
             />
-          <Route 
+            <Route 
               path="/signup" 
               element={!user?<Signup />:<Navigate to="/"/>} 
             />
@@ -41,6 +44,18 @@ function App() {
             <Route 
               path="/playlists/:title/:_id" 
               element={<PlaylistMovies/>} 
+            />
+            <Route 
+              path="/profile" 
+              element={<Profile/>} 
+            />
+            <Route 
+              path="/resetpassword" 
+              element={user?<ResetPassword/>:<Navigate to="/login"/>} 
+            />
+            <Route 
+              path="/myplaylists" 
+              element={user?<MyPlaylists/>:<Navigate to="/login"/>} 
             />
           </Routes>
         </div>

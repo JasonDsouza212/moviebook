@@ -3,6 +3,7 @@
 @import 'Playlist.css';
 @import 'message.css';
 @import 'loader.css';
+@import 'Profile.css';
 
 .App {
   text-align: center;

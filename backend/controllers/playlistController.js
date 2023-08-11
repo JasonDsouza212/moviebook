@@ -234,23 +234,29 @@ const AddtoPlaylist = async (req, res) => {
 
 
 
-// update a Playlist
+// Update a Playlist
 const updatePlaylist = async (req, res) => {
-  const { id } = req.params
+  const { id } = req.params;
+  const { title, user_id } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({error: 'Invalid playlist ID'})
+    return res.status(404).json({ error: 'Invalid playlist ID' });
   }
 
-  const playlist = await Playlist.findOneAndUpdate({_id: id}, {
-    ...req.body
-  })
+  try {
+    const playlist = await Playlist.findOne({ _id: id, user_id: user_id });
 
-  if (!playlist) {
-    return res.status(400).json({error: 'No such Playlist'})
+    if (!playlist) {
+      return res.status(400).json({ error: 'No such Playlist' });
+    }
+    playlist.title = title;
+    await playlist.save()
+    return res.status(200).json({ message: 'Playlist updated successfully', playlist });
+  } catch (error) {
+    return res.status(500).json({ error: 'An error occurred while updating the playlist' });
   }
-  res.status(200).json(playlist)
-}
+};
+
 
 
 module.exports = {

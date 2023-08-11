@@ -9,6 +9,7 @@ const Navbar = () => {
   const handleClick =()=>{
     logout()
     alert("Logged out successfully")
+    window.location.href = '/';
   }
 
   return (
@@ -21,7 +22,7 @@ const Navbar = () => {
         <Link className='playlist_nav' to="/playlists">Playlist</Link>
         {user &&(
           <div>
-            <span>{user.email.split('@')[0].toUpperCase()}</span>
+            <Link className='profile_link' to="/profile"><i class="ri-account-circle-fill"></i>{user.email.split('@')[0].toUpperCase()}</Link>
             <button onClick={handleClick}>
                 Log out
             </button>

@@ -87,3 +87,13 @@ form.signup, form.login {
   padding: 8px 20px;
   border-radius: 15px;
 }
+
+.profile_link i{
+  position: relative;
+  top:10px;
+  font-size: xx-large;
+}
+
+.profile_link i:hover{
+  color: #007bff;
+}

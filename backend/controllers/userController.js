@@ -37,7 +37,22 @@ const signupUser= async(req,res)=>{
 
 }
 
+// forgot password 
+const forgotpassword = async (req, res) => {
+    const { email, password, newPassword } = req.body;
+
+    try {
+        const user = await User.resetPassword(email, password, newPassword);
+        console.log("The password has been reset");
+        res.status(200).json({ message: "Password change successful", email });
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 module.exports= {
     signupUser,
-    loginUser
+    loginUser,
+    forgotpassword
 }

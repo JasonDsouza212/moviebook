@@ -26,7 +26,7 @@ const MovieCard = ({ movie, playlists }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization':`Bearer ${user.token}`
+          'Authorization':`rer ${user.token}`
         },
         body: JSON.stringify(topush),
       });

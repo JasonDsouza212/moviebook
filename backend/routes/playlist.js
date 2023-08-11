@@ -48,7 +48,6 @@ router.delete('/:id', deletePlaylist)
 router.delete('/deletefromplaylist/:_id', DeletefromPlaylist)
 
 // UPDATE a Playlist
-router.patch('/:id', updatePlaylist)
-
+router.put('/updateplaylist/:id', updatePlaylist)
 
 module.exports = router
