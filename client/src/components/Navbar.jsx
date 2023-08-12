@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import {useLogout} from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
+import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
   const {logout}= useLogout()
@@ -8,8 +9,8 @@ const Navbar = () => {
 
   const handleClick =()=>{
     logout()
-    alert("Logged out successfully")
     window.location.href = '/';
+    toast.success("Logged out successfully")
   }
 
   return (

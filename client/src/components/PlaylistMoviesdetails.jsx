@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { toast } from 'react-hot-toast';
 
 const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData ,isOwner ,user_id }) => {
   const {user}= useAuthContext()
@@ -15,7 +16,7 @@ const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData ,isOwner ,us
       });
 
       if (response.ok) {
-        alert('Movie Deleted');
+        toast.success('Movie Deleted')
         fetchMovieData()
         console.log('Playlist deleted successfully.');
       } else {

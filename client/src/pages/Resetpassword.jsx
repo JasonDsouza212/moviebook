@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { toast } from 'react-hot-toast';
 
 const ResetPassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -42,7 +43,7 @@ const ResetPassword = () => {
         .then(response => response.json())
         .then(data => {
           console.log('Response:', data);
-          alert("Password reset succesfful")
+          toast.success("Password reset succesfful")
           window.location.href = '/';
         })
 

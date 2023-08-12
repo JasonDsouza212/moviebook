@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import { toast } from 'react-hot-toast';
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -126,7 +127,7 @@ const Playlists = () => {
       });
 
       if (response.ok) {
-        alert("Playlist created successfully")
+        toast.success("Playlist created successfully")
         // Playlist created successfully
         console.log('Playlist created successfully.');
         // Fetch the updated playlists
@@ -157,7 +158,7 @@ const Playlists = () => {
       });
 
       if (response.ok) {
-        alert('Playlist Deleted');
+        toast.success('Playlist Deleted')
         // Playlist was deleted successfully, you may choose to update the UI or fetch updated playlists list
         console.log('Playlist deleted successfully.');
         // Perform any additional actions or show success message here
@@ -193,7 +194,7 @@ const Playlists = () => {
       console.log('Response:', data);
       await fetchPlaylistData(); // Fetch updated playlists
       
-      await alert("Playlist name changed successfully");
+      await toast.success("Playlist name changed successfully")
       
       
     } catch (error) {

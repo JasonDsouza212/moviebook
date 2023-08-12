@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
+import { toast } from 'react-hot-toast';
 
 const MovieCard = ({ movie, playlists }) => {
   const poster = movie.Poster === 'N/A' ? 'https://external-preview.redd.it/LxmS9sZAnmKmtTCbNNGJRlADYv-9xwsOlvhWnUI-lEs.jpg?auto=webp&s=befb86a2df7d8a0609bf17b275e3a0aadf5dd1c7' : movie.Poster;
@@ -37,12 +38,11 @@ const MovieCard = ({ movie, playlists }) => {
 
 
       if (response.ok) {
-        alert("Movie added to playlist successfully")
-        console.log('Movie added to playlist successfully.');
+        toast.success("Movie added to playlist successfully")
         // Perform any additional actions or show success message here
       } else {
-        console.error('Error adding movie to playlist.gyggig');
-        // Perform any error handling or show error message here
+        toast.error("Movie added to playlist successfully")
+        console.error('Error adding movie to playlist');
       }
     } catch (error) {
       console.error('Error adding movie to playlist:', error);
