@@ -3,6 +3,7 @@ import MovieCard from '../components/MovieCard';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import { fetchMovieData, fetchPlaylistData } from '../apicalls/getcall';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -14,53 +15,12 @@ const Movies = () => {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    const fetchPlaylistData = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/api/playlists/myplaylists/${user.id}`,{
-          headers:{
-            'Authorization':`Bearer ${user.token}`
-          }
-        });
-        const data = await response.json();
-        if (data) {
-          const playlistTitles = data.map((playlist) => playlist.title);
-          setPlaylists(playlistTitles);
-          console.log(playlistTitles);
-        } else {
-          setPlaylists([]);
-          console.log('No playlist found.');
-        }
-      } catch (error) {
-        console.error('Oops! Something went wrong.', error);
-      }
-    };
-  
-    if(user){
-      fetchPlaylistData();
-    }
+    if(user) fetchPlaylistData(user,setPlaylists);
   }, []);
   
 
   useEffect(() => {
-    const fetchMovieData = async () => {
-      setError(null);
-      setLoading(true);
-      try {  
-        const response = await fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&apikey=${process.env.REACT_APP_APIKEY}`);
-        const data = await response.json();
-        if (data.Search) {
-          setMovies(data.Search);
-        } else {
-          setError('No movies found.');
-        }
-      } catch (error) {
-        setError('Oops! Something went wrong.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovieData();
+    fetchMovieData(setError,setLoading,setMovies ,searchTerm);
   }, [searchTerm]);
 
   // Function to handle the search button click

@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { toast } from 'react-hot-toast';
 
-const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData ,isOwner ,user_id }) => {
+const PlaylistMoviesdetails = ({ _id,movie ,playlistname,fetchMovieData ,isOwner ,user_id ,setLoading , setError ,setIsOwner ,setMovies  }) => {
   const {user}= useAuthContext()
   async function handlePlaylistDelete(id){
     try {
@@ -17,7 +17,7 @@ const PlaylistMoviesdetails = ({ movie ,playlistname,fetchMovieData ,isOwner ,us
 
       if (response.ok) {
         toast.success('Movie Deleted')
-        fetchMovieData()
+        fetchMovieData(_id,setError,setLoading,user,setIsOwner,setMovies)
         console.log('Playlist deleted successfully.');
       } else {
         console.error('Error deleting playlist.');

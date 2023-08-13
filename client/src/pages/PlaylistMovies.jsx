@@ -4,6 +4,7 @@ import PlaylistMoviesdetails from '../components/PlaylistMoviesdetails';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import { fetchMovieDatafornonlogin, fetchMovieDataindividual } from '../apicalls/getcall';
 
 const PlaylistMovies = () => {
   const { _id, title } = useParams();
@@ -42,31 +43,13 @@ const PlaylistMovies = () => {
     }
   };
 
-  const fetchMovieDatafornonlogin = async () => {
-    setError(null);
-    setLoading(true);
-    try {  
-      const response = await fetch(`http://localhost:4000/api/playlists/movies/${_id}`);
-      const data = await response.json();
-      console.log(data.movies)
-      if (data.movies) {
-        setMovies(data.movies);
-        setLoading(false); // Update the loading state after fetching data
-      } else {
-        setError('No movies found.');
-        setLoading(false); // Update the loading state even if there's an error
-      }
-    } catch (error) {
-      setError('Oops! Something went wrong.');
-      setLoading(false); // Update the loading state in case of an error
-    }
-  };
+ 
 
   useEffect(() => {
     if(user){
-      fetchMovieData();
+      fetchMovieDataindividual(_id,setError,setLoading,user,setIsOwner,setMovies);
     }else{
-      fetchMovieDatafornonlogin()
+      fetchMovieDatafornonlogin(_id,setError,setLoading,setMovies)
     }
 
   }, [_id]);
@@ -83,7 +66,8 @@ const PlaylistMovies = () => {
         <PlaylistMoviesdetails key={movie._id} 
         movie={movie} 
         playlistname={title}  
-        fetchMovieData={fetchMovieData} 
+        fetchMovieData={fetchMovieDataindividual} 
+        _id={_id}
         isOwner={isOwner} 
         user_id={user?user.id:""}/>
       ))}
