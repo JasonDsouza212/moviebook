@@ -5,20 +5,13 @@ import { onAddToPlaylist } from '../apicalls/postcalls';
 const MovieCard = ({ movie, playlists }) => {
   const poster = movie.Poster === 'N/A' ? 'https://external-preview.redd.it/LxmS9sZAnmKmtTCbNNGJRlADYv-9xwsOlvhWnUI-lEs.jpg?auto=webp&s=befb86a2df7d8a0609bf17b275e3a0aadf5dd1c7' : movie.Poster;
   const {user} = useAuthContext()
+  const [showModal, setShowModal] = useState(false)
 
-  // State to manage the visibility of the playlist modal
-  const [showModal, setShowModal] = useState(false);
-  // console.log(movie)
-
-
-
-  // Function to handle selecting a playlist and add the movie to the selected playlist
   const handlePlaylistSelection = (playlist) => {
-    onAddToPlaylist(playlist, movie,user); // Call the parent component function to post the movie to the playlist
-    setShowModal(false); // Close the modal
+    onAddToPlaylist(playlist, movie,user); 
+    setShowModal(false); 
   };
 
-  // Function to handle "Add to Playlist" button click and toggle modal visibility
   const handleAddToPlaylistClick = () => {
     setShowModal(!showModal);
   };

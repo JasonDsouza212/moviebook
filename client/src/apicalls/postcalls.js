@@ -20,18 +20,13 @@ const handleFormSubmit = async (event ,newPlaylistTitle ,isPrivate , user , setP
 
       if (response.ok) {
         toast.success("Playlist created successfully")
-        // Playlist created successfully
         console.log('Playlist created successfully.');
-        // Fetch the updated playlists
         fetchPlaylistDataforpage(user, setPlaylists ,setError ,setLoading);
       } else {
-        // Handle error response
         console.error('Error creating playlist.');
-        // Perform any error handling or show error message here
       }
     } catch (error) {
       console.error('Error creating playlist:', error);
-      // Handle any network or other errors here
     }
 
     setShowForm(false);
@@ -69,14 +64,12 @@ const handleFormSubmit = async (event ,newPlaylistTitle ,isPrivate , user , setP
 
       if (response.ok) {
         toast.success("Movie added to playlist successfully")
-        // Perform any additional actions or show success message here
       } else {
         toast.error("Movie added to playlist successfully")
         console.error('Error adding movie to playlist');
       }
     } catch (error) {
       console.error('Error adding movie to playlist:', error);
-      // Handle any network or other errors here
     }
   };
   

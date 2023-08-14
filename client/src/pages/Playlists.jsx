@@ -18,18 +18,13 @@ const Playlists = () => {
   const [newPlaylistTitle, setNewPlaylistTitle] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
   const [btn, setBtn] = useState('Create New Playlist');
-  const [tempid, setTempid] = useState(''); // Added tempid state
-
-  // Modal State
+  const [tempid, setTempid] = useState(''); 
   const [showModal, setShowModal] = useState(false);
-
-  // Modal Input State
   const [modalInput, setModalInput] = useState('');
 
-  // Show Modal with playlist id
   const handleShowModal = (playlistid) => {
     setShowModal(true);
-    setTempid(playlistid); // Set tempid with the playlist id
+    setTempid(playlistid); 
   };
 
   // Hide Modal
@@ -41,7 +36,6 @@ const Playlists = () => {
   // Modal Form Submit
   const handleModalSubmit = () => {
     console.log('Modal Input:', modalInput);
-    // Close the modal
     handleCloseModal();
   };
 
@@ -86,7 +80,6 @@ const Playlists = () => {
                   className="playlist-link"
                 >
                   <div className="playlist-image">
-                    {/* Add a placeholder image or set a default image URL */}
                     <img src="https://rb.gy/jiek0" alt="Playlist" />
                   </div>
                   </Link>

@@ -27,7 +27,7 @@ async function handlePlaylistedit(modalInput,user,setError,setLoading,setPlaylis
     } catch (error) {
       setError('Playlist name change failed');
     }finally{
-      setTempid(''); // Reset tempid
+      setTempid('');
       setShowModal(false);
       setModalInput("");
     }

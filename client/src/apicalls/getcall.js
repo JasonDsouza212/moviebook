@@ -81,7 +81,8 @@ const fetchMovieData = async (setError,setLoading,setMovies,searchTerm) => {
       }
     } catch (error) {
       setError('Oops! Something went wrong.');
-      setLoading(false);
+      setLoading(false); 
+    }
   };
 
 
@@ -111,7 +112,7 @@ const fetchMovieData = async (setError,setLoading,setMovies,searchTerm) => {
       }
     } catch (error) {
       setError('Oops! Something went wrong.');
-      setLoading(false); // Update the loading state in case of an error
+      setLoading(false); 
     }
   };
   
@@ -131,11 +132,11 @@ const fetchMovieData = async (setError,setLoading,setMovies,searchTerm) => {
         setPlaylists(data);
       } else {
         setError('No playlists found.');
-        setPlaylists([]); // Set an empty array if data is not an array
+        setPlaylists([]);
       }
     } catch (error) {
       setError('Oops! Something went wrong.');
-      setPlaylists([]); // Set an empty array in case of error
+      setPlaylists([]); 
     } finally {
       setLoading(false);
     }
@@ -153,18 +154,15 @@ const fetchMovieData = async (setError,setLoading,setMovies,searchTerm) => {
         setPlaylists(data);
       } else {
         setError('No playlists found.');
-        setPlaylists([]); // Set an empty array if data is not an array
+        setPlaylists([]); 
       }
     } catch (error) {
       setError('Oops! Something went wrong.');
-      setPlaylists([]); // Set an empty array in case of error
+      setPlaylists([]);
     } finally {
       setLoading(false);
     }
   };
-
-
-  
 
   export {
     fetchMovieData,

@@ -55,7 +55,6 @@ const MyPlaylists = () => {
                   <li key={playlist._id} className="playlist-item">
                     <Link to={`/playlists/${encodeURIComponent(playlist.title)}/${playlist._id}`} className="playlist-link">
                       <div className="playlist-image">
-                        {/* Add a placeholder image or set a default image URL */}
                         <img src="https://dailytrojan.com/wp-content/uploads/2021/11/dt_soundtrack.png" alt="Playlist" />
                       </div>
                       <div className="playlist-info">

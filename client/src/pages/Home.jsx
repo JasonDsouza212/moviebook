@@ -35,7 +35,6 @@ const Movies = () => {
 
   return (
     <div className='MoviesPage'>
-      {/* Search bar */}
       <div className="search-container">
         <input
           type="text"
