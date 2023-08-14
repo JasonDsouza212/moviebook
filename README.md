@@ -5,14 +5,14 @@
     <!-- to change tagline if necessary -->
     </div> <br>
 
-# 🙌 Welcome to Movie Book App
+<h1> <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px"> Welcome to Movie Book App </h1>
 
- # 🚀 About
+ # 🎬 About
 
 - The app is designed to help you save your favorite movies and series in a playlist, allowing you to keep track of them.
 - The app fetches data from the free-tier API provided by  [omdbAPI](https://www.omdbapi.com/)
 
-# 💰 Features
+# 🎥 Features
 - Login or sign up using an **Email ID and Password**.
 - Access the app by logging in with your Email ID and Password.
 - The app provides the following services:
