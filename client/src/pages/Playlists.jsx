@@ -4,6 +4,10 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { toast } from 'react-hot-toast';
+import { fetchPlaylistData2, fetchPlaylistDataofnonlogin } from '../apicalls/getcall';
+import { handleFormSubmit } from '../apicalls/postcalls';
+import { handlePlaylistedit } from '../apicalls/putcalls';
+import { handlePlaylistDelete2 } from '../apicalls/deletecalls';
 
 const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -36,66 +40,17 @@ const Playlists = () => {
 
   // Modal Form Submit
   const handleModalSubmit = () => {
-    // Perform actions on submit
-    // For example, fire a function to handle the modal form submission
-    // You can access the modalInput value here
     console.log('Modal Input:', modalInput);
-
     // Close the modal
     handleCloseModal();
   };
 
-  const fetchPlaylistData = async () => {
-    setError(null);
-    setLoading(true);
-    try {
-      const response = await fetch(`http://localhost:4000/api/playlists/all/${user.id}`, {
-        headers: {
-          Authorization: `Bearer ${user.token}`
-        }
-      });
-      const data = await response.json();
-
-      if (Array.isArray(data)) {
-        setPlaylists(data);
-      } else {
-        setError('No playlists found.');
-        setPlaylists([]); // Set an empty array if data is not an array
-      }
-    } catch (error) {
-      setError('Oops! Something went wrong.');
-      setPlaylists([]); // Set an empty array in case of error
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchPlaylistDataofnonlogin = async () => {
-    setError(null);
-    setLoading(true);
-    try {
-      const response = await fetch(`http://localhost:4000/api/playlists/all`, {});
-      const data = await response.json();
-
-      if (data) {
-        setPlaylists(data);
-      } else {
-        setError('No playlists found.');
-        setPlaylists([]); // Set an empty array if data is not an array
-      }
-    } catch (error) {
-      setError('Oops! Something went wrong.');
-      setPlaylists([]); // Set an empty array in case of error
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  
   useEffect(() => {
     if (user) {
-      fetchPlaylistData();
+      fetchPlaylistData2(setError,setLoading,user,setPlaylists);
     } else {
-      fetchPlaylistDataofnonlogin();
+      fetchPlaylistDataofnonlogin(setError,setLoading,setPlaylists);
     }
   }, []);
 
@@ -108,104 +63,9 @@ const Playlists = () => {
       setShowForm(true);
     }
   };
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const playlistData = {
-      title: newPlaylistTitle,
-      private: isPrivate,
-      user_id: user.id,
-    };
-    try {
-      const response = await fetch('http://localhost:4000/api/playlists', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`
-        },
-        body: JSON.stringify(playlistData),
-      });
-
-      if (response.ok) {
-        toast.success("Playlist created successfully")
-        // Playlist created successfully
-        console.log('Playlist created successfully.');
-        // Fetch the updated playlists
-        fetchPlaylistData();
-      } else {
-        // Handle error response
-        console.error('Error creating playlist.');
-        // Perform any error handling or show error message here
-      }
-    } catch (error) {
-      console.error('Error creating playlist:', error);
-      // Handle any network or other errors here
-    }
-
-    setShowForm(false);
-    setNewPlaylistTitle('');
-    setIsPrivate(false);
-    setBtn('Create New Playlist');
-  };
-
-  async function handlePlaylistDelete(id) {
-    try {
-      const response = await fetch(`http://localhost:4000/api/playlists/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${user.token}`
-        }
-      });
-
-      if (response.ok) {
-        toast.success('Playlist Deleted')
-        // Playlist was deleted successfully, you may choose to update the UI or fetch updated playlists list
-        console.log('Playlist deleted successfully.');
-        // Perform any additional actions or show success message here
-        fetchPlaylistData(); // Fetch the updated playlists
-      } else {
-        console.error('Error deleting playlist.');
-        // Perform any error handling or show error message here
-      }
-    } catch (error) {
-      console.error('Error deleting playlist:', error);
-      // Handle any network or other errors here
-    }
-  }
-
-  async function handlePlaylistedit() {
-    try {
-      const requestData = {
-        title: modalInput,
-        user_id: user.id,
-      };
-      const requestOptions = {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${user.token}`
-        },
-        body: JSON.stringify(requestData)
-      };
-  
-      const response = await fetch(`http://localhost:4000/api/playlists/updateplaylist/${tempid}`, requestOptions);
-      const data = await response.json();
-  
-      console.log('Response:', data);
-      await fetchPlaylistData(); // Fetch updated playlists
-      
-      await toast.success("Playlist name changed successfully")
-      
-      
-    } catch (error) {
-      setError('Playlist name change failed');
-    }finally{
-      setTempid(''); // Reset tempid
-      setShowModal(false);
-      setModalInput("");
-    }
-  
-
+    
+  function handleFormSubmitfunc(event){
+    handleFormSubmit(event ,newPlaylistTitle ,isPrivate , user , setPlaylists ,setError ,setLoading ,setShowForm , setNewPlaylistTitle ,setIsPrivate ,setBtn )
   }
   
 
@@ -229,6 +89,7 @@ const Playlists = () => {
                     {/* Add a placeholder image or set a default image URL */}
                     <img src="https://rb.gy/jiek0" alt="Playlist" />
                   </div>
+                  </Link>
                   <div className="playlist-info">
                     <p className="playlist-title">
                       {playlist.title}
@@ -237,7 +98,7 @@ const Playlists = () => {
                       )}
                     </p>
                   </div>
-                </Link>
+                
                 {showModal && (
                   <div className="modal">
                     <div className="modal-content">
@@ -251,7 +112,7 @@ const Playlists = () => {
                           value={modalInput}
                           onChange={(e) => setModalInput(e.target.value)}
                         />
-                        <button onClick={handlePlaylistedit}>Submit</button>
+                        <button onClick={()=>handlePlaylistedit(modalInput,user,setError,setLoading,setPlaylists,setTempid,setShowModal,setModalInput,tempid)}>Submit</button>
                       </form>
                     </div>
                   </div>
@@ -260,7 +121,7 @@ const Playlists = () => {
                 {user && user.id === playlist.user_id && (
                   <button
                     className="delete-button"
-                    onClick={() => handlePlaylistDelete(playlist._id)}
+                    onClick={() => handlePlaylistDelete2(playlist._id, user , setPlaylists ,setError ,setLoading)}
                   >
                     Delete
                   </button>
@@ -275,7 +136,7 @@ const Playlists = () => {
             </button>
           )}
           {showForm && (
-            <form className="playlist-form" onSubmit={handleFormSubmit}>
+            <form className="playlist-form" onSubmit={handleFormSubmitfunc}>
               <input
                 type="text"
                 value={newPlaylistTitle}

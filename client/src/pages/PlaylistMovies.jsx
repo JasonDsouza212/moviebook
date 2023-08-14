@@ -14,37 +14,6 @@ const PlaylistMovies = () => {
   const [isOwner, setIsOwner]= useState(false)
   const {user}= useAuthContext()
 
-  const fetchMovieData = async () => {
-    setError(null);
-    setLoading(true);
-    try {  
-      const response = await fetch(`http://localhost:4000/api/playlists/${_id}`,{
-        headers:{
-          'Authorization':`Bearer ${user.token}`
-        }
-      });
-      const data = await response.json();
-      if(data.user_id===user.id){
-        setIsOwner(true)
-      }else {
-        setIsOwner(false)
-      }
-      console.log(data.movies)
-      if (data.movies) {
-        setMovies(data.movies);
-        setLoading(false); // Update the loading state after fetching data
-      } else {
-        setError('No movies found.');
-        setLoading(false); // Update the loading state even if there's an error
-      }
-    } catch (error) {
-      setError('Oops! Something went wrong.');
-      setLoading(false); // Update the loading state in case of an error
-    }
-  };
-
- 
-
   useEffect(() => {
     if(user){
       fetchMovieDataindividual(_id,setError,setLoading,user,setIsOwner,setMovies);
@@ -69,6 +38,10 @@ const PlaylistMovies = () => {
         fetchMovieData={fetchMovieDataindividual} 
         _id={_id}
         isOwner={isOwner} 
+        setError={setError}
+        setLoading={setLoading}
+        setIsOwner={setIsOwner}
+        setMovies={setMovies}
         user_id={user?user.id:""}/>
       ))}
     </div>

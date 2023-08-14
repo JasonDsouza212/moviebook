@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { toast } from 'react-hot-toast';
+import { handleSubmit } from '../apicalls/putcalls';
 
 const ResetPassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -10,52 +11,12 @@ const ResetPassword = () => {
   const [error, setError] = useState('');
   const {user}= useAuthContext()
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!currentPassword || !newPassword || !confirmPassword) {
-      setError('All fields are required');
-      return;
-    }
-
-    if (newPassword !== confirmPassword) {
-      setError("Passwords don't match");
-      return;
-    }
-    try {
-      setIsLoading(true);
-      const requestData = {
-        email: user.email,
-        user_id: user.id,
-        newPassword: newPassword
-      };
-
-      const requestOptions = {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization':`Bearer ${user.token}`
-        },
-        body: JSON.stringify(requestData)
-      };
-      
-      fetch("http://localhost:4000/api/user/forgotpassword", requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          console.log('Response:', data);
-          toast.success("Password reset succesfful")
-          window.location.href = '/';
-        })
-
-    } catch (error) {
-      setError('Password reset failed');
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  function handleSubmitfun(e){
+    handleSubmit(e,user,currentPassword,newPassword,confirmPassword,setError,setIsLoading)
+  }
 
   return (
-    <form className="login" onSubmit={handleSubmit}>
+    <form className="login" onSubmit={handleSubmitfun}>
       <h3>Reset Password</h3>
       <label>Current Password:</label>
       <input

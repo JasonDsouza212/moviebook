@@ -4,7 +4,6 @@ import 'aos/dist/aos.css';
 import AOS from 'aos';
 
 const Profile = () => {
-  // Initialize AOS
   AOS.init();
 
   return (

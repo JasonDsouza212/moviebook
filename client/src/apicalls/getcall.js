@@ -54,11 +54,11 @@ const fetchMovieData = async (setError,setLoading,setMovies,searchTerm) => {
         setPlaylists(data);
       } else {
         setError('No playlists found.');
-        setPlaylists([]); // Set an empty array if data is not an array
+        setPlaylists([]); 
       }
     } catch (error) {
       setError('Oops! Something went wrong.');
-      setPlaylists([]); // Set an empty array in case of error
+      setPlaylists([]); 
     } finally {
       setLoading(false);
     }
@@ -74,19 +74,18 @@ const fetchMovieData = async (setError,setLoading,setMovies,searchTerm) => {
       console.log(data.movies)
       if (data.movies) {
         setMovies(data.movies);
-        setLoading(false); // Update the loading state after fetching data
+        setLoading(false); 
       } else {
         setError('No movies found.');
-        setLoading(false); // Update the loading state even if there's an error
+        setLoading(false); 
       }
     } catch (error) {
       setError('Oops! Something went wrong.');
-      setLoading(false); // Update the loading state in case of an error
-    }
+      setLoading(false);
   };
 
 
-  const fetchMovieDataindividual = async (_id,setError,setLoading,user,setIsOwner,setMovies) => {
+  const fetchMovieDataindividual = async (_id, setError, setLoading, user, setIsOwner, setMovies) => {
     setError(null);
     setLoading(true);
     try {  
@@ -96,30 +95,83 @@ const fetchMovieData = async (setError,setLoading,setMovies,searchTerm) => {
         }
       });
       const data = await response.json();
-      if(data.user_id===user.id){
-        setIsOwner(true)
-      }else {
-        setIsOwner(false)
+      if(data.user_id === user.id){
+        setIsOwner(true);
+      } else {
+        setIsOwner(false);
       }
-      console.log(data.movies)
+  
       if (data.movies) {
-        setMovies(data.movies);
-        setLoading(false); // Update the loading state after fetching data
+        const sortedMovies = data.movies.sort((a, b) => new Date(a.Released) - new Date(b.Released));
+        setMovies(sortedMovies);
+        setLoading(false); 
       } else {
         setError('No movies found.');
-        setLoading(false); // Update the loading state even if there's an error
+        setLoading(false);
       }
     } catch (error) {
       setError('Oops! Something went wrong.');
       setLoading(false); // Update the loading state in case of an error
     }
   };
+  
+  // the api call is for playlists page 
+  const fetchPlaylistData2 = async (setError,setLoading,user,setPlaylists) => {
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:4000/api/playlists/all/${user.id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`
+        }
+      });
+      const data = await response.json();
 
+      if (Array.isArray(data)) {
+        setPlaylists(data);
+      } else {
+        setError('No playlists found.');
+        setPlaylists([]); // Set an empty array if data is not an array
+      }
+    } catch (error) {
+      setError('Oops! Something went wrong.');
+      setPlaylists([]); // Set an empty array in case of error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+// playlist data for non login users
+  const fetchPlaylistDataofnonlogin = async (setError,setLoading,setPlaylists) => {
+    setError(null);
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:4000/api/playlists/all`, {});
+      const data = await response.json();
+
+      if (data) {
+        setPlaylists(data);
+      } else {
+        setError('No playlists found.');
+        setPlaylists([]); // Set an empty array if data is not an array
+      }
+    } catch (error) {
+      setError('Oops! Something went wrong.');
+      setPlaylists([]); // Set an empty array in case of error
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  
 
   export {
     fetchMovieData,
     fetchPlaylistData,
     fetchPlaylistDataforpage,
     fetchMovieDatafornonlogin,
-    fetchMovieDataindividual
+    fetchMovieDataindividual,
+    fetchPlaylistData2,
+    fetchPlaylistDataofnonlogin
 }
